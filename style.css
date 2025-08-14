@@ -1,49 +1,119 @@
+CSS (style.css)
+Général
 body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+font-family: 'Arial', sans-serif;
+background-color: #f4f4f4;
+margin: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height: 100vh;
+padding-top: 20px;
+box-sizing: border-box;
+}
+
+h1 {
+color: #333;
+margin-bottom: 20px;
 }
 
 .info-jeu {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 20px;
+background-color: #fff;
+padding: 15px 20px;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
 }
 
-#startButton {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-bottom: 20px;
+.info-jeu h2 {
+margin: 5px 0;
+color: #555;
+font-size: 1.1em;
 }
 
+Boutons
+button {
+background-color: #007bff;
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 1em;
+transition: background-color 0.3s ease;
+margin: 5px;
+}
+
+button:hover {
+background-color: #0056b3;
+}
+
+#fbLoginBtn {
+background-color: #1877f2;
+}
+
+#fbLoginBtn:hover {
+background-color: #134ba7;
+}
+
+#shareBtn {
+background-color: #28a745;
+display: none; /* Cache initialement */
+}
+
+#shareBtn:hover {
+background-color: #1e7e34;
+}
+
+Input et Messages
+label {
+display: block;
+margin-bottom: 5px;
+color: #333;
+}
+
+input#imageUpload {
+margin-bottom: 15px;
+padding: 8px;
+border: 1px solid #ddd;
+border-radius: 4px;
+}
+
+#loadingMessage {
+color: #555;
+margin-bottom: 15px;
+font-style: italic;
+}
+
+Canvas
+#faceCanvas {
+border: 1px solid #ccc;
+margin-bottom: 20px;
+}
+
+Grille
 .grille {
-    display: grid;
-    grid-template-columns: repeat(3, 150px);
-    grid-template-rows: repeat(3, 150px);
-    gap: 10px;
-    width: 470px; /* 150*3 + 10*2 */
-    border: 2px solid #333;
-    background-color: #a5a5a5;
-    padding: 10px;
+display: grid;
+grid-template-columns: repeat(3, 100px);
+grid-gap: 10px;
+margin-bottom: 20px;
 }
 
 .case {
-    background-color: #ccc;
-    border: 1px solid #999;
+width: 100px;
+height: 100px;
+background-color: #eee;
+border: 1px solid #ccc;
+border-radius: 5px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 1.5em;
+cursor: pointer;
+transition: background-color 0.2s ease;
 }
 
-/* C'est notre "taupe" pour l'instant */
-.mole {
-    background-color: #3498db;
-    cursor: pointer;
+.case.mole {
+background-color: #ddd; /* Couleur quand la taupe apparaît (sera recouverte par l'image) */
 }
 
-/* On cache le canvas de travail */
-#faceCanvas {
-    display: none;
-}

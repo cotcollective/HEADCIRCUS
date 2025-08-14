@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEADCIRCUS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Frappe-la-Tête !</h1>
+
+    <div id="status"></div> 
+
+    <div class="info-jeu">
+        <h2>Score : <span id="score">0</span></h2>
+        <h2>Temps restant : <span id="temps-restant">30</span></h2>
+    </div>
+
+    <button id="fbLoginBtn">Se connecter avec Facebook</button>
+
+    <label for="imageUpload">Ou choisir un fichier :</label>
+    <input type="file" id="imageUpload" accept="image/png, image/jpeg">
+    <p id="loadingMessage"></p>
+
+    <button id="startButton">Démarrer le Jeu</button>
+    <button id="shareBtn" style="display: none;">Partager mon Score</button>
+
+    <canvas id="faceCanvas"></canvas>
+
+    <div class="grille">
+        <div class="case" id="1"></div>
+        <div class="case" id="2"></div>
+        <div class="case" id="3"></div>
+        <div class="case" id="4"></div>
+        <div class="case" id="5"></div>
+        <div class="case" id="6"></div>
+        <div class="case" id="7"></div>
+        <div class="case" id="8"></div>
+        <div class="case" id="9"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="script.js"></script>
+
+   <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1338003537634702', // ⚠️ N'OUBLIEZ PAS DE REMETTRE VOTRE ID !
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v19.0'
+        });
+        
+        // NOUVELLE MÉTHODE PLUS ROBUSTE
+        // On attend que le SDK confirme son statut avant de lancer notre app.
+        // C'est la garantie que FB.init() est bien terminé.
+        FB.getLoginStatus(function(response) {
+            console.log("Statut de connexion FB vérifié.", response);
+            initializeApp(); // On lance notre script seulement maintenant
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/fr_CA/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.info-jeu {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+#startButton {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.grille {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    gap: 10px;
+    width: 470px; /* 150*3 + 10*2 */
+    border: 2px solid #333;
+    background-color: #a5a5a5;
+    padding: 10px;
+}
+
+.case {
+    background-color: #ccc;
+    border: 1px solid #999;
+}
+
+/* C'est notre "taupe" pour l'instant */
+.mole {
+    background-color: #3498db;
+    cursor: pointer;
+}
+
+/* On cache le canvas de travail */
+#faceCanvas {
+    display: none;
+}

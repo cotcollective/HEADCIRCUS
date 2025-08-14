@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HeadCircus - Version Locale</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Frappe-la-Tête !</h1>
+
+    <div class="info-jeu">
+        <h2>Score : <span id="score">0</span></h2>
+        <h2>Temps restant : <span id="temps-restant">30</span></h2>
+    </div>
+
+    <label for="imageUpload">Choisir un fichier :</label>
+    <input type="file" id="imageUpload" accept="image/png, image/jpeg">
+    <p id="loadingMessage"></p>
+
+    <button id="startButton">Démarrer le Jeu</button>
+
+    <canvas id="faceCanvas"></canvas>
+
+    <div class="grille">
+        <div class="case" id="1"></div>
+        <div class="case" id="2"></div>
+        <div class="case" id="3"></div>
+        <div class="case" id="4"></div>
+        <div class="case" id="5"></div>
+        <div class="case" id="6"></div>
+        <div class="case" id="7"></div>
+        <div class="case" id="8"></div>
+        <div class="case" id="9"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="script_local.js"></script> </body>
+</html>

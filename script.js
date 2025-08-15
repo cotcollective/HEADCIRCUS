@@ -1,4 +1,4 @@
-// --- SCRIPT FINAL COMPLET (CORRIGÉ POUR L'ORDRE DE CHARGEMENT) ---
+// --- SCRIPT FINAL COMPLET (AVEC OUTILS ET SONS) ---
 
 console.log("Script.js chargé.");
 
@@ -13,12 +13,26 @@ const faceCanvas = document.querySelector('#faceCanvas');
 const fbLoginBtn = document.getElementById('fbLoginBtn');
 const statusDiv = document.getElementById('status');
 const shareBtn = document.getElementById('shareBtn');
+const grille = document.querySelector('.grille');
+const tools = document.querySelectorAll('.tool');
+const backgroundMusic = document.getElementById('backgroundMusic');
+
+// --- VARIABLES & SONS ---
+let selectedTool = 'hammer';
+const hitSound = new Audio('sounds/boing.wav');
+const missSound = new Audio('sounds/x.wav');
+let score = 0;
+let tempsRestant = 30;
+let positionTaupe = null;
+let timerId = null;
+let timerTaupeId = null;
+let imageTaupeURL = null;
+
 
 // --- FONCTION PRINCIPALE DE DÉMARRAGE ---
 function initializeApp() {
     console.log("Facebook SDK prêt. Initialisation de l'application.");
 
-    // Le code qui dépend des éléments de la page est maintenant ici
     imageUpload.addEventListener('change', async (event) => {
         const file = event.target.files[0];
         if (!file) { return; }
@@ -61,7 +75,7 @@ function initializeApp() {
         const shareMessage = `J'ai fait ${score} points sur HEADCIRCUS ! Peux-tu battre mon score ?`;
         FB.ui({
             method: 'share',
-            href: 'https://headcircus.local:8080', // ou 127.0.0.1
+            href: window.location.href,
             quote: shareMessage
         }, function(response){
             if (response && !response.error_message) {
@@ -73,6 +87,19 @@ function initializeApp() {
     });
 
     startButton.addEventListener('click', demarrerJeu);
+
+    tools.forEach(tool => {
+        tool.addEventListener('click', function() {
+            tools.forEach(t => t.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedTool = this.dataset.tool;
+            updateCursor();
+            console.log('Outil sélectionné :', selectedTool);
+        });
+    });
+
+    document.getElementById('hammer').classList.add('selected');
+    updateCursor();
 }
 
 // --- CHARGEMENT DES MODÈLES FACE-API ---
@@ -91,7 +118,11 @@ Promise.all([
     loadingMessage.textContent = "Erreur de chargement des modèles.";
 });
 
-// --- FONCTIONS (Ne changent pas) ---
+// --- FONCTIONS ---
+function updateCursor() {
+    grille.style.cursor = `url('images/${selectedTool}_cursor.png'), auto`;
+}
+
 function fetchFacebookUser() {
     statusDiv.innerHTML = 'Récupération des informations...';
     FB.api('/me', {fields: 'name, picture.type(large)'}, function(response) {
@@ -108,13 +139,6 @@ function fetchFacebookUser() {
         }
     });
 }
-
-let score = 0;
-let tempsRestant = 30;
-let positionTaupe = null;
-let timerId = null;
-let timerTaupeId = null;
-let imageTaupeURL = null;
 
 function placerTaupe() {
     cases.forEach(caseElement => {
@@ -145,6 +169,9 @@ cases.forEach(caseElement => {
             positionTaupe = null;
             caseElement.classList.remove('mole');
             caseElement.style.backgroundImage = 'none';
+            hitSound.play();
+        } else if (timerId) {
+            missSound.play();
         }
     });
 });
@@ -155,6 +182,8 @@ function decompte() {
     if (tempsRestant === 0) {
         clearInterval(timerId);
         clearInterval(timerTaupeId);
+        backgroundMusic.pause();
+        backgroundMusic.currentTime = 0;
         alert('Partie terminée ! Votre score est de ' + score);
         startButton.disabled = false;
         imageUpload.disabled = false;
@@ -177,6 +206,11 @@ function demarrerJeu() {
     imageUpload.disabled = true;
     fbLoginBtn.disabled = true;
     shareBtn.style.display = 'none';
+    
+    backgroundMusic.src = 'sounds/circus_music.mp3';
+    backgroundMusic.volume = 0.3;
+    backgroundMusic.play();
+
     timerTaupeId = setInterval(placerTaupe, 700);
     timerId = setInterval(decompte, 1000);
 }

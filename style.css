@@ -1,119 +1,197 @@
-CSS (style.css)
-Général
+/* Importation d'une police "cirque" depuis Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 body {
-font-family: 'Arial', sans-serif;
-background-color: #f4f4f4;
-margin: 0;
-display: flex;
-flex-direction: column;
-align-items: center;
-min-height: 100vh;
-padding-top: 20px;
-box-sizing: border-box;
+    background-color: #fdf5e6; /* Fond crème/beige */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    justify-content: center; /* Centre le conteneur du jeu */
+    align-items: flex-start; /* Aligne en haut */
+    text-align: center;
+    color: #4a4a4a;
+    padding-top: 20px;
+    min-height: 100vh;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
-color: #333;
-margin-bottom: 20px;
+    font-family: 'Lobster', cursive; /* Police spéciale pour le titre */
+    font-size: 4.5em;
+    color: #e74c3c; /* Rouge cirque */
+    text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.2); /* Effet d'ombre 3D */
+    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .info-jeu {
-background-color: #fff;
-padding: 15px 20px;
-border-radius: 8px;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 10px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border: 4px solid #3498db; /* Bordure bleue */
 }
 
 .info-jeu h2 {
-margin: 5px 0;
-color: #555;
-font-size: 1.1em;
+    margin: 5px 0;
+    color: #555;
+    font-size: 1.2em;
 }
 
-Boutons
 button {
-background-color: #007bff;
-color: white;
-padding: 10px 20px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-font-size: 1em;
-transition: background-color 0.3s ease;
-margin: 5px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    border: 3px solid #333;
+    border-radius: 12px;
+    background-color: #f1c40f; /* Jaune doré */
+    color: #333;
+    margin: 5px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 4px 0 #c29d0b;
 }
 
 button:hover {
-background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #c29d0b;
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #c29d0b;
 }
 
 #fbLoginBtn {
-background-color: #1877f2;
+    background-color: #1877f2;
+    color: white;
+    box-shadow: 0 4px 0 #125db0;
 }
-
 #fbLoginBtn:hover {
-background-color: #134ba7;
+    box-shadow: 0 6px 0 #125db0;
+}
+#fbLoginBtn:active {
+    box-shadow: 0 2px 0 #125db0;
 }
 
 #shareBtn {
-background-color: #28a745;
-display: none; /* Cache initialement */
+    background-color: #2ecc71;
+    color: white;
+    box-shadow: 0 4px 0 #25a25a;
+    display: none;
 }
-
 #shareBtn:hover {
-background-color: #1e7e34;
+    box-shadow: 0 6px 0 #25a25a;
+}
+#shareBtn:active {
+    box-shadow: 0 2px 0 #25a25a;
 }
 
-Input et Messages
-label {
-display: block;
-margin-bottom: 5px;
-color: #333;
-}
-
-input#imageUpload {
-margin-bottom: 15px;
-padding: 8px;
-border: 1px solid #ddd;
-border-radius: 4px;
-}
-
-#loadingMessage {
-color: #555;
-margin-bottom: 15px;
-font-style: italic;
-}
-
-Canvas
-#faceCanvas {
-border: 1px solid #ccc;
-margin-bottom: 20px;
-}
-
-Grille
+/* Effet chapiteau pour la grille */
 .grille {
-display: grid;
-grid-template-columns: repeat(3, 100px);
-grid-gap: 10px;
-margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 20px;
+    padding: 20px;
+    background-image: 
+        radial-gradient(circle at 50% 0, rgba(255,255,255,.3), rgba(255,255,255,0) 70%),
+        linear-gradient(45deg, #e74c3c 25%, #fff 25%, #fff 50%, #e74c3c 50%, #e74c3c 75%, #fff 75%, #fff 100%);
+    background-size: 100% 100%, 56px 56px;
+    border: 10px solid #3498db;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2), inset 0 0 15px rgba(0,0,0,0.3);
 }
 
 .case {
-width: 100px;
-height: 100px;
-background-color: #eee;
-border: 1px solid #ccc;
-border-radius: 5px;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 1.5em;
-cursor: pointer;
-transition: background-color 0.2s ease;
+    background-color: #8c5a3b; /* Marron pour la terre */
+    border: 5px solid #5a3a22; /* Marron plus foncé */
+    border-radius: 50%; /* Pour faire des trous ronds */
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,0.4); /* Effet de profondeur */
 }
 
-.case.mole {
-background-color: #ddd; /* Couleur quand la taupe apparaît (sera recouverte par l'image) */
+.mole {
+    background-color: transparent;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.1s;
+    transform: scale(0); /* La taupe est cachée par défaut */
+    animation: appear 0.2s ease-out forwards;
 }
 
+/* Animation d'apparition */
+@keyframes appear {
+    from { transform: scale(0) translateY(20px); }
+    to { transform: scale(1) translateY(0); }
+}
+
+#faceCanvas {
+    display: none;
+}
+
+#status {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #2980b9;
+    font-weight: bold;
+}
+
+/* Style de la boîte à outils */
+.toolbox {
+    position: fixed;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #f1c40f;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 150px;
+}
+
+.toolbox h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    font-family: 'Lobster', cursive;
+    font-size: 1.4em;
+}
+
+.tool {
+    margin-bottom: 15px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.tool:hover {
+    opacity: 1;
+    transform: scale(1.1);
+} 
+
+.tool.selected {
+    opacity: 1;
+    background-color: #f1c40f;
+    transform: scale(1.1);
+}
+
+.tool img {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 0 auto;
+}

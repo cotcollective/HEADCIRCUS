@@ -1,7 +1,3 @@
-Copilot said: Yo désolé! Le système demande le SHA
-
-Yo désolé! Le système demande le SHA exact. Mais t'inquiète, voici la version COMPLÈTE du README avec TOUT ce qu'il faut - copy/paste directement dans ton éditeur:
-Markdown
 
 # 🎪 HEADCIRCUS - FB MINI GAME
 
